@@ -33,3 +33,35 @@ getChefBirthday(1).then(birthday => {                                           
     console.error('Errore:', error);
 });
 
+
+// Scrivi la funzione getChefBirthday(id), che deve:
+// Essere asincrona (async).
+// Utilizzare await per chiamare le API.
+// Restituire una Promise con la data di nascita dello chef.
+// Gestire gli errori con try/catch
+
+function getChefBirthday(id) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const recipeResponse = await fetch(`https://dummyjson.com/recipes/${id}`);
+            if (!recipeResponse.ok) {
+                throw new Error('Errore nel recupero della ricetta');
+            }
+            const recipe = await recipeResponse.json();
+
+            const userId = recipe.userId;
+
+            const chefResponse = await fetch(`https://dummyjson.com/users/${userId}`);
+            if (!chefResponse.ok) {
+                throw new Error('Errore nel recupero delle informazioni dello chef');
+            }
+            const chef = await chefResponse.json();
+
+            resolve(chef.birthDate);
+        } catch (error) {
+            reject(error);
+        } finally {
+            console.log('Operazione completata');
+        }
+    });
+}
