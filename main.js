@@ -27,11 +27,13 @@ async function getChefBirthday(id) {
     }
 }
 
-getChefBirthday(1).then(birthday => {                                                                 // Esempio di utilizzo della funzione
-    console.log(`La data di nascita dello chef è: ${birthday}`);
+getChefBirthday(1).then(birthday => {                                      
+    const formattedDate = dayjs(birthday).format("DD/MM/YYYY")                             // Esempio di utilizzo della funzione
+    return console.log(`La data di nascita dello chef è: ${formattedDate}`);
 }).catch(error => {
     console.error('Errore:', error);
 });
+
 
 
 // Scrivi la funzione getChefBirthday(id), che deve:
