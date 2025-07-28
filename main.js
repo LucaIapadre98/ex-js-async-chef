@@ -6,31 +6,28 @@
 
 async function getChefBirthday(id) {
     try {
-        // Recupera la ricetta
-        const recipeResponse = await fetch(`https://dummyjson.com/recipes/${id}`);
+        const recipeResponse = await fetch(`https://dummyjson.com/recipes/${id}`);                           // Recupera la ricetta
         if (!recipeResponse.ok) {
             throw new Error('Errore nel recupero della ricetta');
         }
         const recipe = await recipeResponse.json();
 
-        // Estrai userId dalla ricetta
-        const userId = recipe.userId;
+    
+        const userId = recipe.userId;                                                                 // Estrai userId dalla ricetta
 
-        // Recupera le informazioni dello chef
-        const chefResponse = await fetch(`https://dummyjson.com/users/${userId}`);
+        const chefResponse = await fetch(`https://dummyjson.com/users/${userId}`);                         // Recupera le informazioni dello chef
         if (!chefResponse.ok) {
             throw new Error('Errore nel recupero delle informazioni dello chef');
         }
         const chef = await chefResponse.json();
 
-        // Restituisce la data di nascita dello chef
-        return chef.birthDate;
+        return chef.birthDate;                                                                     // Restituisce la data di nascita dello chef                            
     } catch (error) {
         console.error(error);
     }
 }
-// Esempio di utilizzo della funzione
-getChefBirthday(1).then(birthday => {
+
+getChefBirthday(1).then(birthday => {                                                                 // Esempio di utilizzo della funzione
     console.log(`La data di nascita dello chef è: ${birthday}`);
 }).catch(error => {
     console.error('Errore:', error);
